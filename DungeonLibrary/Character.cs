@@ -3,11 +3,6 @@
     public class Character
     {
         //Funny  - Fields
-        /*
-            name – string
-            hitChance – int
-            block – int
-         */
         private int _life;
         private int _maxLife;
         private string _name;
@@ -60,8 +55,12 @@
             set { _block = value; }
         }
 
+        //Collect - Constructors (ctors)
+        //1 fully qualified constructor
         public Character(int maxLife, int life, string name, int hitChance, int block)
         {
+            //Property = Parameter
+            //Pascal = camelCase
             MaxLife = maxLife;
             Life = life;
             Name = name;
@@ -69,8 +68,6 @@
             Block = block;
         }
 
-        //Collect - Constructors (ctors)
-        //1 fully qualified constructor
 
         //Monkeys - Methods
         //ToString() override
@@ -88,9 +85,6 @@
 
         public int CalcBlock()
         {
-            //To be able to override this in a child class
-            //make it VIRTUAL
-
             //This basic version just returns block, but this
             //will give us the option to do something different
             //in child classes.
