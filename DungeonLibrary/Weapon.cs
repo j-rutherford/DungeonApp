@@ -15,6 +15,7 @@ namespace DungeonLibrary
         private string _name;
         private int _bonusHitChance;
         private bool _isTwoHanded;
+        private WeaponType _type;
 
 
         //Properties
@@ -43,10 +44,15 @@ namespace DungeonLibrary
             get { return _isTwoHanded; }
             set { _isTwoHanded = value; }
         }//end IsTwoHanded
+        public WeaponType Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
 
 
         //Constructors
-        public Weapon(int minDamage, int maxDamage, string name, int bonusHitChance, bool isTwoHanded)
+        public Weapon(int minDamage, int maxDamage, string name, int bonusHitChance, bool isTwoHanded, WeaponType type)
         {
             //handle MaxDamage assignment FIRST, since MinDamage uses it in the setter.
             //If you have ANY properties that have business rules
@@ -57,6 +63,7 @@ namespace DungeonLibrary
             Name = name;
             BonusHitChance = bonusHitChance;
             IsTwoHanded = isTwoHanded;
+            Type = type;
         }//end FQ CTOR
 
         //Methods
@@ -64,7 +71,7 @@ namespace DungeonLibrary
         {
             return $"{Name}\t{ MinDamage} to { MaxDamage} Damage\n" +
                 $"Bonus Hit: {BonusHitChance}%\n" +
-                $"{(IsTwoHanded ? "Two-Handed" : "One-Handed")}";
+                $"Type: {Type}\t\t{(IsTwoHanded ? "Two-Handed" : "One-Handed")}";
         }//end ToString() override
     }//end class
 }//end namespace
