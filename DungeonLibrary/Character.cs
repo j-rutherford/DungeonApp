@@ -1,6 +1,7 @@
 ﻿namespace DungeonLibrary
 {
-    public class Character
+    //abstract means it can only be inherited from; you cannot create one.
+    public abstract class Character
     {
         //Funny  - Fields
         private int _life;
@@ -57,7 +58,7 @@
 
         //Collect - Constructors (ctors)
         //1 fully qualified constructor
-        public Character(int maxLife, int life, string name, int hitChance, int block)
+        public Character(string name, int hitChance, int block, int maxLife, int life)
         {
             //Property = Parameter
             //Pascal = camelCase
@@ -67,8 +68,6 @@
             HitChance = hitChance;
             Block = block;
         }
-
-
         //Monkeys - Methods
         //ToString() override
         public override string ToString()
@@ -83,18 +82,18 @@
                 Block);
         }
 
-        public int CalcBlock()
+        public virtual int CalcBlock()
         {
             //This basic version just returns block, but this
             //will give us the option to do something different
             //in child classes.
             return Block;
         }//end CalcBlock
-        public int CalcHitChance()
+        public virtual int CalcHitChance()
         {
             return HitChance;
         }//end CalcHitChance
-        public int CalcDamage()
+        public virtual int CalcDamage()
         {
             return 0;
             //starting this with just returning 0. We will

@@ -1,21 +1,48 @@
-﻿namespace DungeonApp
+﻿using DungeonLibrary;
+
+namespace DungeonApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //TODO Create a player
+            Console.Title = "DUNGEON OF DOOM";
+            Console.WriteLine("Your journey begins...\n");
+
+            int score = 0;//declare this running variable outside of the main do while loop. It can then be displayed inside of the menu (Player Info option) or at the end of the game (exit or die).
+
+            #region Player Creation
+
+            Weapon sword = new Weapon(1, 8, "Long Sword", 10, false, WeaponType.Sword);
+            /*
+            //Possible Expansion: 
+            //Allow player to define chatacter name
+            Console.Write("Enter your name: ");
+            //string userName = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Welcome, {0}! Your journey begins...", userName);
+            Console.ReadKey();
+            Console.Clear();
+            */
+            Player player = new Player("Leeroy Jenkins", 70, 5, 40, 40, Race.Elf, sword);
+            #endregion
+
+
 
             bool exit = false;// both loops
             do
             {
-                //TODO create a monster
-
+                //create a monster -- random monster generator in the Monster class; creates a list of 4 different monsters and randomly selects one of them.
+                Monster monster = Monster.GetMonster();
                 //create a room
-                Console.WriteLine(GetRoom());
+                Console.WriteLine(GetRoom() + $"\nIn this room: {monster.Name}");
 
 
-                bool reload = false;//inner loop (menu)
+                bool reload = false;//inner loop (menu) -- when set to true, will 'reload' a new room with a new monster.
+
+                #region MENU
+                //Could extract this into another class library (like an Engine - a class library that houses basic functionality not specific to any datatype class)
+
                 do
                 {
                     Console.Write("\nPlease choose an action:\n" +
@@ -43,9 +70,13 @@
 
                         case "p":
                             Console.WriteLine("Player Info");
+                            Console.WriteLine(player);
+                            Console.WriteLine("Monsters defeated: " + score);
                             break;
                         case "m":
                             Console.WriteLine("Monster Info");
+                            //Print monster info
+                            Console.WriteLine(monster);
                             break;
 
                         case "x":
@@ -62,15 +93,15 @@
                 } while (!reload && !exit); //if either reload or exit become true, it will exit the inner loop (menu).
                                             //reload == false, != true, !reload
 
+                #endregion
 
             } while (!exit);// while exit is NOT TRUE, keep looping
-            Console.WriteLine("Thanks for playing!");
-            //TODO Display Score
+            Console.WriteLine("Thanks for playing! Final score: " + score);
         }//end Main()
 
         private static string GetRoom()
         {
-            string[] rooms = new string[] 
+            string[] rooms = new string[]
             {
                 "The room is dark and musty with the smell of lost souls.",
                 "You enter a pretty pink powder room and instantly get glitter on you.",
